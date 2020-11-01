@@ -1,0 +1,124 @@
+Hash
+
+# Así declaras un dato Hash
+capitales = {}
+
+
+capitales = {"Colombia" => "Bogota" }
+
+# Podemos agregar más elemntos así
+capitales["Mexico"] = "Ciudad de Mexico"
+
+# Para acceder a un valor específico, la llave tiene que ser igual, en Ruby no se diferencia cuando un carácter es Uppercase o lowercase
+capitales["Colombia"] # "Bogota"
+
+# Para saber su tamaño
+capitales.size
+
+# Para saber si está vacío
+capitales.empty?
+
+# Preguntar si este Hash tiene un valor específico en el que estemos interesados
+capitales.has_value? "Bogota"
+
+# Preguntar si este Hash tiene una llave (elemento) específico en el que estemos interesados
+capitales.has_value? "Colombia"
+
+# Podemos invertir los valores a llames y viceversa
+capitales.invert
+capitales.invert["Bogota"] # "Colombia"
+
+# Se utiliza para mezclar dos Hashes
+capitales.merge({"Marte" => "Musk"})
+
+# Este se comporta muy parecido al método .map() de los Arrays
+capitales.transform_values { |x| x.downcase }
+
+# La k, v hace referencia a Key y Value.
+puts capitales.map { |k,v| "La capital de #{k} es #{v}" }
+
+
+# Este se comporta muy parecido al método .map() de los Arrays
+capitales.transform_values { |x| x.downcase }
+
+# La k, v hace referencia a Key y Value.
+puts capitales.map { |k,v| "La capital de #{k} es #{v}" }
+
+
+#También podemos crear un hash a partir de arreglo de parejas de Arrays
+
+[["pepito",13],["Carmen",14]].to_h
+
+
+Rangos, el principal uso y quizás el más apropiado para los rangos, es expresar una secuencia: las secuencias tienen un punto inicial y un punto final, y una forma de producir los sucesivos valores entre ambos. En Ruby, esas secuencias son creadas usando los operandos ‘…’ y ‘…’
+
+‘…’ genera una secuencia donde los puntos límites están incluidos.
+(1..3).to_a
+ 
+#es la secuencia 1, 2, 3
+‘…’ genera una secuencia en la que no está incluida el límite superior.
+(1...5).to_a
+ 
+#equivale a 1, 2, 3, 4
+
+
+
+---------------------------------------------------------------------
+** Regex o «expresiones regulares»**
+
+Una expresión regular viene a ser un patrón, que se ajusta a un string para que coincida o no, son una poderosa herramienta para trabajar con texto.
+
+Un regex se declara entre slash “/”
+Un regex puede tener multiples matches
+Algunas abreviaciones para clases de caracteres
+
+Todas las abreviaciones precedentes, también tienen una forma negada. Para ello, se pone la misma letra en mayúsculas:
+Expresión	significado
+.	cualquier carácter
+[]	especificación por rango. P.ej: [a-z], una letra de la a, a la z
+\w	letra o número; es lo mismo que [0-9A-Za-z]
+\W	cualquier carácter que no sea letra o número
+\s	carácter de espacio; es lo mismo que [ \t\n\r\f]
+\S	cualquier carácter que no sea de espacio
+\d	número; lo mismo que [0-9]
+\D	cualquier carácter que no sea un número
+\b	retroceso (0x08), si está dentro de un rango
+\b	límite de palabra, si NO está dentro de un rango
+\B	no límite de palabra
+*	cero o más repeticiones de lo que le precede
++	una o más repeticiones de lo que le precede
+$	fin de la línea
+{m,n}	como menos m, y como mucho n repeticiones de lo que le precede
+?	al menos una repetición de lo que le precede; lo mismo que {0,1}
+()	agrupar expresiones
+pipeline*	operador lógico O, busca lo de antes o lo después
+un pipeline es el carácter " | "
+
+Conceptos extraídos de :
+http://rubytutorial.wikidot.com/expresion
+https://carlossanchezperez.wordpress.com/2013/06/30/expresiones-regulares-en-ruby-no-te-dejes-intimidar-primera-parte/
+
+
+--------------------------------------
+Proc
+
+Un bloque no es un objeto, es parte de la sintaxis de ejecución de un método, por tanto no tiene las funcionalidades de un objeto.
+Podemos simular la funcionalidad de un objetos al pasar un bloque como un “proc”, la sintaxis dice que antes del nombre de la variable de método se bebe utilizar el signo “&” el cual le indica a ruby que el bloque que se esta pasando en realidad se trata de un objeto “proc”
+Un método solo puede recibir un bloque, pero puede recibir varios “proc”
+Es las lenta la ejecución de un proc que la de un bloque
+Procedimiento return en un proc
+
+Siempre que intentemos utilizar la palabra reservada return en un proc debemos tener en cuenta que :
+
+Para un proc se debe llamar un metodo y dentro del método declarar el procedimiento que a utilizar.
+Si no lo hacemos de este modo nos retornara Error “local jump error” porque esta tratando de ejecutar un return de primer nivel
+Lambda
+
+Una “lambda” es una función anónima (sin nombre), su sintaxis es “lambda {…}” o también utilizando la sintaxis de flecha “->(){}”
+Hay similitudes muy grandes entre los “procs” y las “lambdas”, lo que los diferencia es que un “proc” se comporta como un bloque, mientras que una “lambda” se comporta como un método
+A una “lambda” se le pueden pasar argumentos, pero al igual que a un metodo estos deben pasarse en el mismo orden que fueron llamados y son obligatorios, lo que no sucede en un “proc” pues para este es opcional
+Cuando se hace “return” de una desde una “lambda” se detiene la ejecución del método (lambda), pero no se detiene la ejecución de donde fue llamado (otro método), caso contrario si estamos trabajando con bloques que si termina la ejecucion del metodo donde fue llamado
+Conceptos extraídos de:
+
+http://nereida.deioc.ull.es/~lpp/perlexamples/node154.html
+http://community.logicalbricks.com/node/111ssss
